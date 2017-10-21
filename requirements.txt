@@ -1,0 +1,17 @@
+dj-database-url==0.4.1
+gunicorn==19.6.0
+psycopg2==2.6.2
+whitenoise==2.0.6
+yowsup2==2.5.2
+requests==2.9.1
+bs4==0.0.1
+forex-python==0.3.2
+lxml==3.7.3
+demjson==2.2.4
+pycurl==7.43.0
+pytube==6.2.2
+pywhatsapp==0.0.7
+pymysql==0.7.11
+simplejson==3.11.1
+beckett==0.8.0
+blinker==1.4.0
