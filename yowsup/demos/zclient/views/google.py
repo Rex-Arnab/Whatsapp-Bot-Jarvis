@@ -27,6 +27,7 @@ class GoogleViews():
         self.yt_sender.send_by_url(jid=message.getFrom(), file_url=match.group("video_id"))
 
     def google_search(self, message, match):
+        # if you can then help me to Recover this Google Search Feature
 	req = requests.get('https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=%s' % match.group("term"))
         #req = requests.get("http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=%s" % match.group("term"))
         page_url = urllib.unquote(req.json()["responseData"]["results"][0]["url"])
