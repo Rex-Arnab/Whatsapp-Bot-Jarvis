@@ -85,9 +85,11 @@ class ResultGetKeysIqProtocolEntity(ResultIqProtocolEntity):
             registrationId = ResultGetKeysIqProtocolEntity._bytesToInt(userNode.getChild("registration").getData())
             identityKey = IdentityKey(DjbECPublicKey(ResultGetKeysIqProtocolEntity.encStr(userNode.getChild("identity").getData())))
 
-            preKeyId = ResultGetKeysIqProtocolEntity._bytesToInt(preKeyNode.getChild("id").getData())
-            preKeyPublic = DjbECPublicKey(ResultGetKeysIqProtocolEntity.encStr(preKeyNode.getChild("value").getData()))
-
+            try: preKeyId = ResultGetKeysIqProtocolEntity._bytesToInt(preKeyNode.getChild("id").getData())
+            except: preKeyId = None; pass
+            try: preKeyPublic = DjbECPublicKey(ResultGetKeysIqProtocolEntity.encStr(preKeyNode.getChild("value").getData()))
+            except: preKeyPublic = None; pass
+        
             signedPreKeyId = ResultGetKeysIqProtocolEntity._bytesToInt(signedPreKeyNode.getChild("id").getData())
             signedPreKeySig = ResultGetKeysIqProtocolEntity.encStr(signedPreKeyNode.getChild("signature").getData())
             signedPreKeyPub = DjbECPublicKey(ResultGetKeysIqProtocolEntity.encStr(signedPreKeyNode.getChild("value").getData()))

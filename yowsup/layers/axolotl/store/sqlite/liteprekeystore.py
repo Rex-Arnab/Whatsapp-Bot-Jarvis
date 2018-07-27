@@ -1,6 +1,6 @@
 from axolotl.state.prekeystore import PreKeyStore
 from axolotl.state.prekeyrecord import PreKeyRecord
-import sys,os
+import sys
 class LitePreKeyStore(PreKeyStore):
     def __init__(self, dbConn):
         """
@@ -19,8 +19,6 @@ class LitePreKeyStore(PreKeyStore):
         result = cursor.fetchone()
         if not result:
             raise Exception("No such prekeyRecord!")
-            os.system('rm -rf ~/.yowsup/*')
-            os.system('python yowsup-cli demos -c conf.txt -z')
 
         return PreKeyRecord(serialized = result[0])
 

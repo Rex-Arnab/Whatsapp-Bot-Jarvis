@@ -24,9 +24,11 @@ import requests
 import shutil
 import hashlib
 import re
+#from yowsup.layers.av import *
 from yowsup.demos.zclient.utils import config
 from pytube import YouTube
-
+from yowsup.layers.you_get import *
+from gtts import gTTS
 
 class MediaSender():
     """
@@ -53,6 +55,7 @@ class MediaSender():
         except Exception as e:
             logging.exception(e)
             self._on_error(jid)
+            
 
     def send_by_path(self, jid, path, caption=None):
         """
@@ -76,7 +79,7 @@ class MediaSender():
         if not os.path.isfile(file_path):
             response = requests.get(file_url, stream=True)
             with open(file_path, 'wb') as out_file:
-                shutil.copyfileobj(response.raw, out_file)
+                shutil.copyfileobj(response.raw, "/tmp/a.jpg")
             del response
         return file_path
 
@@ -114,7 +117,7 @@ class MediaSender():
             logging.info("[Upload progress]%s => %s, %d%% \r" % (os.path.basename(filePath), jid, progress))
 
     def _on_error(self, jid, *args, **kwargs):
-        self.interface_layer.toLower(TextMessageProtocolEntity("{!}", to=jid))
+        self.interface_layer.toLower(TextMessageProtocolEntity("{Feature Not Working}", to=jid))
 
     def _get_file_ext(self, url):
         return self.file_extension_regex.findall(url)[0]
@@ -176,7 +179,7 @@ class UrlPrintSender(ImageSender):
         return file_path
 
     def _build_file_path(self, page_url):
-        id = hashlib.md5(page_url).hexdigest()
+        id = hashlib.md5(page_url.encode("UTF-8")).hexdigest()
         return ''.join([self.storage_path, id, str(int(time.time()))[:-2], ".png"])
 
 
@@ -196,10 +199,16 @@ class EspeakTtsSender(AudioSender):
 
     def tts_record(self, text, lang='en'):
         file_path = self._build_file_path(text)
-        cmd = "espeak -v%s -w %s '%s'" % (lang, file_path, text)
-        subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).wait()
+        print("LOCATION = ",file_path)
+
+        tts = gTTS(text="'"+text+"'", lang='en', slow=True)
+        tts.save("tmp/hello.mp3")
+        file_path="tmp/hello.mp3"
+
+        #cmd = "python espeak -v%s -w %s '%s'" % (lang, file_path, text)
+        #subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).wait()
         return file_path
 
     def _build_file_path(self, text):
-        id = hashlib.md5(text).hexdigest()
+        id = hashlib.md5(text.encode("UTF-8")).hexdigest()
         return ''.join([self.storage_path, id, ".wav"])

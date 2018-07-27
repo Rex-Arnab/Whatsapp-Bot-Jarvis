@@ -14,7 +14,7 @@ class YowsupEnvType(abc.ABCMeta):
         super(YowsupEnvType, cls).__init__(name, bases, dct)
 
 class YowsupEnv(with_metaclass(YowsupEnvType, object)):
-    __metaclass__ = YowsupEnvType
+    #__metaclass__ = YowsupEnvType
     __ENVS = {}
     __CURR = None
 

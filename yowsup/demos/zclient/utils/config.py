@@ -33,8 +33,8 @@
 import os, logging
 
 defaults = {
-    "WHATSAPP_LOGIN": ",
-    "WHATSAPP_PW": "",
+    "WHATSAPP_LOGIN": "",
+    "WHATSAPP_PW": "=",
     "WHATSAPP_ADMIN": "",
     "BING_API_KEY": ""
 }

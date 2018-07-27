@@ -19,7 +19,6 @@ from yowsup.layers.protocol_contacts           import YowContactsIqProtocolLayer
 from yowsup.layers.protocol_chatstate          import YowChatstateProtocolLayer
 from yowsup.layers.protocol_privacy            import YowPrivacyProtocolLayer
 from yowsup.layers.protocol_profiles           import YowProfilesProtocolLayer
-#from yowsup.layers.notifications               import NotificationsLayer
 from yowsup.layers.protocol_calls import YowCallsProtocolLayer
 from yowsup.env import YowsupEnv
 from yowsup.common.constants import YowConstants
@@ -32,7 +31,6 @@ logger = logging.getLogger(__name__)
 
 
 YOWSUP_PROTOCOL_LAYERS_BASIC = (
-    #NotificationsLayer,
     YowAuthenticationProtocolLayer, YowMessagesProtocolLayer,
     YowReceiptProtocolLayer, YowAckProtocolLayer, YowPresenceProtocolLayer,
     YowIbProtocolLayer, YowIqProtocolLayer, YowNotificationsProtocolLayer,

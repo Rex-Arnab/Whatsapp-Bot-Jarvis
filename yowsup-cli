@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 __version__ = "2.0.15"
 __author__ = "Tarek Galal"
-
+#Thanks to Tarek Galal For This Basic Steps
+#modified By Programmer Arnab
 import sys, argparse, yowsup, logging
 from yowsup.env import YowsupEnv
 
@@ -244,8 +245,8 @@ class DemosArgParser(YowArgParser):
         echoOpts = self.add_argument_group("Echo client demo")
         echoOpts.add_argument('-e', '--echo', action = "store_true", help = "Start the Yowsup Echo client")
 
-        zOpts = self.add_argument_group("Jaris client demo")
-        zOpts.add_argument('-z', '--z', action = "store_true", help = "Start the Jarvis client")
+        zOpts = self.add_argument_group("z client demo")
+        zOpts.add_argument('-z', '--z', action = "store_true", help = "Start the Yowsup z client")
 
         sendOpts = self.add_argument_group("Send client demo")
         sendOpts.add_argument('-s', '--send', action="store", help = "Send a message to specified phone number, "

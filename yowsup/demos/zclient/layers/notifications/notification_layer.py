@@ -6,7 +6,10 @@
     Is this implementation we use the CreateGroupsNotificationProtocolEntity to check if the bot was
     added in a group, and leave if it is not allowed.
 """
-import config
+import yowsup.demos.zclient.views.config
+
+from yowsup.layers.protocol_messages.protocolentities.message_text import TextMessageProtocolEntity
+
 from yowsup.layers.interface import YowInterfaceLayer, ProtocolEntityCallback
 from yowsup.layers.protocol_groups.protocolentities.iq_groups_leave import LeaveGroupsIqProtocolEntity
 from yowsup.layers.protocol_groups.protocolentities.iq_result_groups_list import ListGroupsResultIqProtocolEntity
@@ -20,14 +23,17 @@ from yowsup.layers.protocol_groups.protocolentities.notification_groups_remove i
 class NotificationsLayer(YowInterfaceLayer):
     def __init__(self):
         super(NotificationsLayer, self).__init__()
+        #self.interface_layer = interface_layer
 
     @ProtocolEntityCallback("notification")
     def onNotification(self, notification):
         """
             Reacts to any notification received
         """
+        #self.interface_layer.toLower(TextMessageProtocolEntity("Hello I am Jarvis Bot.", to=message.getFrom()))
         self.toLower(notification.ack())
         if isinstance(notification, CreateGroupsNotificationProtocolEntity):  # added on new group
+            return TextMessageProtocolEntity("Hello I am Jarvis Bot.", to=message.getFrom())
             self.on_created_group(notification)
         elif isinstance(notification, ListGroupsResultIqProtocolEntity):  # result of a query of all groups
             self.on_groups_list(notification)
@@ -46,6 +52,7 @@ class NotificationsLayer(YowInterfaceLayer):
         group_id = createGroupsNotificationProtocolEntity.getGroupId() + "@g.us"
         if self.is_allowed_on_group(createGroupsNotificationProtocolEntity):
             # this is a good place to a "Hello Group" message
+            return TextMessageProtocolEntity("Hello Group i am jarvis:)", to=message.getFrom())
             pass
         else:
             self.toLower(LeaveGroupsIqProtocolEntity(group_id))
