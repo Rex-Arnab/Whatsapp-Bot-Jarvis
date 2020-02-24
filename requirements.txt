@@ -18,7 +18,7 @@ simplejson==3.11.1
 beckett==0.8.0
 blinker==1.4.0
 #pytube
-Pillow==4.3.0
+Pillow==6.2.0
 translate==2.0.0
 emoji==0.4.5
 #av==0.3.3
